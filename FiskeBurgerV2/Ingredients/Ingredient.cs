@@ -6,13 +6,8 @@ namespace FiskeBurgerV2
 {
     class Ingredient
     {
-        public string Name;
-        Category Category = new Category();
-
-        //public List<Category> Categories = new List<Category>()
-        //{
-        //    new Category("Bun"),
-        //};
+        public string Name { get; }
+        public Category Category { get; }
 
         public Ingredient(string name, Category category)
         {

@@ -6,14 +6,11 @@ namespace FiskeBurgerV2
 {
     class Category
     {
-        public string CategoryName;
+        public string Name { get; }
 
-        public Category()
+        public Category(string name)
         {
-        }
-        public Category(string categoryName)
-        {
-            CategoryName = categoryName;
+            Name = name;
         }
     }
 }
