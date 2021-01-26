@@ -13,16 +13,12 @@ namespace FiskeBurgerV2.Ingredients
 
         public IEnumerable<Category> All => new Category[] { Bun, Vegetable, Burger, Topping };
 
-        //public IEnumerable<Category> Alle;
-
         public Categories()
         {
             Bun = new Category("Bun");
             Vegetable = new Category("Vegetable");
             Burger = new Category("Burger");
             Topping = new Category("Topping");
-
-            //Alle = new Category[] { Bun, Vegetable, Burger };
         }
     }
 }

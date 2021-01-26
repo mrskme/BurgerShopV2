@@ -21,7 +21,6 @@ namespace FiskeBurgerV2
         //    {
         //        ingredientsString += ingredient.Name;
         //    }
-
         //    return ingredientsString;
         //}
     }

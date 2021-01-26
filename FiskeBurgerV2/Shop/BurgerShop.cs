@@ -3,21 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using FiskeBurgerV2.Ingredients;
+using FiskeBurgerV2.Shop;
 
 namespace FiskeBurgerV2
 {
     class BurgerShop
     {
-        private Kitchen _kitchen;
+        public Kitchen Kitchen { get; }
+        public Order Order { get; }
 
         public BurgerShop()
         {
-            _kitchen = new Kitchen();
+            Kitchen = new Kitchen();
+            Order = new Order();
         }
 
-        public void GiveBurgerToCustomer(IEnumerable<Ingredient> ingredients)
+        public void GiveBurgerToCustomer(Order order)
         {
-            Console.WriteLine(_kitchen.MakeBurger(ingredients.ToList()));
+            Console.WriteLine(Kitchen.CustomBurger(order));
         }
     }
 }
