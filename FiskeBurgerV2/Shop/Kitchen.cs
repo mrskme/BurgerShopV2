@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,14 +36,41 @@ namespace FiskeBurgerV2
         {
             //Recipe recipe = new Recipe(ingredients);
             if (!order.HasIngredients) return "En eller fler av ingrediensene er manglende i vårt lager eller feil stavet";
-            var bun = 
+            var bun =
             //var Recipe = recipe.Ingredients;
 
-            var Bun = Recipe.Where(i => i.Category.Name == Categories.Bun.Name);
-            if (Bun.Count() > 1) return "Du kan bare ha et brød";
+            Recipe recipe = new Recipe(GetIngredientsIntoList(order););
+
+            //var Bun = Recipe.Where(i => i.Category.Name == Categories.Bun.Name);
+            //if (Bun.Count() > 1) return "Du kan bare ha et brød";
 
             //string ingredientsString = recipe.Ingredients.Aggregate("",(seed,ingredient ) => seed + ingredient.Name + " ");
             return String.Empty;
+        }
+
+        public Ingredient GetIngredient(Ingredient stringIngredient)
+        {
+            var ingredient = Ingredients.FirstOrDefault(I => I.Name == stringIngredient.Name);
+            //foreach (var ingredient in Ingredients)
+            //{
+            //    if (ingredient.Name.Equals(stringIngredient))
+            //    {
+            //        return ingredient;
+            //    }
+            //}
+            return ingredient;
+        }
+        public Recipe GetIngredientsIntoList(Order order)
+        {
+            List<Ingredient> ingredients = new List<Ingredient>();
+
+            foreach (var stringIngredien in order.Ingredients)
+            {
+                ingredients.Add(GetIngredient(stringIngredient.));
+            }
+
+            var Recipe = new Recipe(Ingredients);
+            return Recipe;
         }
     }
 }
