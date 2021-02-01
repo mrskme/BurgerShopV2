@@ -10,7 +10,6 @@ namespace FiskeBurgerV2
 {
     class Kitchen
     {
-        //public  List<Ingredient> Ingredients { get; set; }
         public Ingredients Ingredients;
         private Categories Categories;
         public Kitchen()
@@ -27,8 +26,6 @@ namespace FiskeBurgerV2
 
             if (IsDuplicateIngredient(recipe, Categories.Bun)) return "Du kan bare ha et brød";
 
-            if (IsDuplicateIngredient(recipe, Categories.Burger)) return "Du kan bare ha en burger";
-
             return MakeStringOfRecipe(recipe);
         }
 
@@ -44,10 +41,38 @@ namespace FiskeBurgerV2
             return Recipe;
         }
         public string MakeStringOfRecipe(Recipe recipe)
-        {
-            string RecipeString = recipe.Ingredients.Aggregate("", (seed, ingredient) => seed + ingredient.Name + " ");
-            return RecipeString;
+        { 
+            var recipeString = string.Empty;
+
+            recipeString += "You are handed a burger consisting of: ";
+            var vegetableDuplicates = recipe.Ingredients.Where(i => i.Category == Categories.Vegetable).ToList(); 
+            var toppingDuplicates = recipe.Ingredients.Where(i => i.Category == Categories.Topping).ToList();
+            var bun = recipe.Ingredients.Where(i => i.Category == Categories.Bun).ToList();
+            var burger = recipe.Ingredients.Where(i => i.Category == Categories.Burger).ToList();
+
+            recipeString += MakeString(vegetableDuplicates);
+            recipeString += MakeString(toppingDuplicates);
+            recipeString += MakeString(bun);
+            recipeString += MakeString(burger);
+            return recipeString;
         }
+
+        private string MakeString(List<Ingredient> ingredientsDuplicates)
+        {
+            var categoryString = string.Empty;
+            if (ingredientsDuplicates.Any())
+            {
+                categoryString += $"\n{ingredientsDuplicates[0].Category.Name}";
+                if (ingredientsDuplicates.Count > 1) categoryString += "s";
+                categoryString += ":";
+                foreach (var duplicate in ingredientsDuplicates)
+                {
+                    categoryString += $"\n  -{duplicate.Name}";
+                }
+            }
+            return categoryString;
+        }
+
         public bool IsDuplicateIngredient(Recipe recipe, Category category)
         {
             var isDuplicateIngredient = recipe.Ingredients.Count(i => i.Category == category) > 1;

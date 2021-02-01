@@ -43,7 +43,7 @@ namespace FiskeBurgerV2.Ingredientserino
             Superdressing = new Ingredient("Superdressing", Categories.Topping);
             Ketchup = new Ingredient("Ketchup", Categories.Topping);
             Hamburger = new Ingredient("Hamburger", Categories.Burger);
-            Fiskeburger = new Ingredient("Fiskeburger", Categories.Burger);
+            Fiskeburger = new Ingredient("Fishburger", Categories.Burger);
         }
     }
 }
