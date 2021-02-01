@@ -14,14 +14,14 @@ namespace FiskeBurgerV2
             Ingredients = ingredients.ToList();
         }
 
-        //public string WriteIngredients()
-        //{
-        //    string ingredientsString = null;
-        //    foreach (var ingredient in _ingredients)
-        //    {
-        //        ingredientsString += ingredient.Name;
-        //    }
-        //    return ingredientsString;
-        //}
+        public string WriteIngredients()
+        {
+            string ingredientsString = null;
+            foreach (var ingredient in Ingredients)
+            {
+                ingredientsString += ingredient.Name;
+            }
+            return ingredientsString;
+        }
     }
 }

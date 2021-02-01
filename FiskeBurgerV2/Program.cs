@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using FiskeBurgerV2.Ingredients;
+using FiskeBurgerV2.Ingredientserino;
 using FiskeBurgerV2.Shop;
 
 namespace FiskeBurgerV2
@@ -11,9 +11,8 @@ namespace FiskeBurgerV2
         static void Main(string[] args)
         {
             var burgerShop = new BurgerShop();
-            var order = new Order("Onion", "Sesame seed bun", "Tomato", "Hamburger");
-            //Console.WriteLine(order.HasIngredients);
-            
+
+            var order = new Order("Onion", "Fiskeburger", "Sesame seed bun", "Tomato", "Hamburger");
 
             burgerShop.GiveBurgerToCustomer(order);
         }

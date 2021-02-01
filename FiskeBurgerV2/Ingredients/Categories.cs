@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace FiskeBurgerV2.Ingredients
+namespace FiskeBurgerV2.Ingredientserino
 {
     class Categories
     {
