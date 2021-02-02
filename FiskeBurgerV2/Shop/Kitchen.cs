@@ -20,13 +20,23 @@ namespace FiskeBurgerV2
 
         public string MakeCustomBurger(Order order)
         {
-            if (!order.HasIngredients) return "En eller fler av ingrediensene er manglende i vårt lager eller feil stavet";
-
+            if (!order.IsCorrectUserInput) return MakeErrorResponse(order);
+            
             Recipe recipe = MakeRecipeOfOrder(order);
 
-            if (IsDuplicateIngredient(recipe, Categories.Bun)) return "Du kan bare ha et brød";
+            if (IsIllegalDuplicateIngredient(recipe, Categories.Bun)) return "Du kan bare ha et brød";
 
             return MakeStringOfRecipe(recipe);
+        }
+
+        public string MakeErrorResponse(Order order)
+        {
+            string errorResponse = string.Empty;
+            if (order.WrongInputs.Count > 1) errorResponse += "Disse ingrediensene\n";
+            else errorResponse += "Denne ingrediensen\n";
+            foreach (var wrongInput in order.WrongInputs) errorResponse += "\"" + wrongInput + "\"\n";
+            errorResponse += "\ner ikke varer tilgjengelig i vårt sortiment.\nSjekk om du har stavet riktig, alle ingrediensene skal begynne med stor bokstav";
+            return errorResponse;
         }
 
         public Recipe MakeRecipeOfOrder(Order order)
@@ -37,23 +47,23 @@ namespace FiskeBurgerV2
             {
                 ingredients.Add(ConvertFromOrderToIngredient(stringIngredient));
             }
-            var Recipe = new Recipe(ingredients);
-            return Recipe;
+            var recipe = new Recipe(ingredients);
+            return recipe;
         }
         public string MakeStringOfRecipe(Recipe recipe)
-        { 
-            var recipeString = string.Empty;
+        {
+            var recipeString = "You are handed a burger consisting of: ";
 
-            recipeString += "You are handed a burger consisting of: ";
-            var vegetableDuplicates = recipe.Ingredients.Where(i => i.Category == Categories.Vegetable).ToList(); 
-            var toppingDuplicates = recipe.Ingredients.Where(i => i.Category == Categories.Topping).ToList();
-            var bun = recipe.Ingredients.Where(i => i.Category == Categories.Bun).ToList();
-            var burger = recipe.Ingredients.Where(i => i.Category == Categories.Burger).ToList();
+            var categorizedIngredients = new List<List<Ingredient>>(Categories.All.Count())
+            {
+                AllIngredientsOfSameCategory(recipe, Categories.Vegetable),
+                AllIngredientsOfSameCategory(recipe, Categories.Topping),
+                AllIngredientsOfSameCategory(recipe, Categories.Bun),
+                AllIngredientsOfSameCategory(recipe, Categories.Burger),
+            };
 
-            recipeString += MakeString(vegetableDuplicates);
-            recipeString += MakeString(toppingDuplicates);
-            recipeString += MakeString(bun);
-            recipeString += MakeString(burger);
+            categorizedIngredients.ForEach(i => recipeString += MakeString(i));
+            
             return recipeString;
         }
 
@@ -73,16 +83,14 @@ namespace FiskeBurgerV2
             return categoryString;
         }
 
-        public bool IsDuplicateIngredient(Recipe recipe, Category category)
-        {
-            var isDuplicateIngredient = recipe.Ingredients.Count(i => i.Category == category) > 1;
-            return isDuplicateIngredient;
-        }
+        private List<Ingredient> AllIngredientsOfSameCategory(Recipe recipe, Category category) 
+            => recipe.Ingredients.Where(i => i.Category == category).ToList();
 
-        public Ingredient ConvertFromOrderToIngredient(string stringIngredient)
-        {
-            var chosenIngredient = Ingredients.All.FirstOrDefault(I => I.Name == stringIngredient);
-            return chosenIngredient;
-        }
+        public bool IsIllegalDuplicateIngredient(Recipe recipe, Category category) 
+            => recipe.Ingredients.Count(i => i.Category == category) > 1;
+
+        public Ingredient ConvertFromOrderToIngredient(string stringIngredient) 
+            => Ingredients.All.FirstOrDefault(I => I.Name == stringIngredient);
+
     }
 }
