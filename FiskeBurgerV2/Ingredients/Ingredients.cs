@@ -16,10 +16,11 @@ namespace FiskeBurgerV2.Ingredientserino
         public Ingredient Onion { get; }
         public Ingredient Tomato { get; }
         public Ingredient Superdressing { get; }
+        public Ingredient Cheese { get; }
         public Ingredient Ketchup { get; }
         public Ingredient Fiskeburger { get; }
         public Ingredient Hamburger { get; }
-        public Ingredient Cheese { get; }
+        
         public List<Ingredient> All => new List<Ingredient>()
         {
             Brioche,
