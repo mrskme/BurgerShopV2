@@ -12,7 +12,7 @@ namespace FiskeBurgerV2
         {
             var burgerShop = new BurgerShop();
 
-            var order = new Order("Onion", "Fishburger", "Sesame seed bun", "Tomato", "Hamburger");
+            var order = new Order("Onion","Tomato","Superdressing","Cheese", "Sesame seed bun", "Tomato", "Hamburger");
 
             burgerShop.GiveBurgerToCustomer(order);
         }

@@ -19,6 +19,7 @@ namespace FiskeBurgerV2.Ingredientserino
         public Ingredient Ketchup { get; }
         public Ingredient Fiskeburger { get; }
         public Ingredient Hamburger { get; }
+        public Ingredient Cheese { get; }
         public List<Ingredient> All => new List<Ingredient>()
         {
             Brioche,
@@ -30,6 +31,7 @@ namespace FiskeBurgerV2.Ingredientserino
             Ketchup, 
             Fiskeburger, 
             Hamburger,
+            Cheese,
         };
         public Ingredients()
         {
@@ -44,6 +46,7 @@ namespace FiskeBurgerV2.Ingredientserino
             Ketchup = new Ingredient("Ketchup", Categories.Topping);
             Hamburger = new Ingredient("Hamburger", Categories.Burger);
             Fiskeburger = new Ingredient("Fishburger", Categories.Burger);
+            Cheese = new Ingredient("Cheese", Categories.Topping);
         }
     }
 }
