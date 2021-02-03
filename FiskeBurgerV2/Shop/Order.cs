@@ -9,11 +9,12 @@ namespace FiskeBurgerV2.Shop
 {
     class Order
     {
-        public bool IsCorrectUserInput;
-        public List<string> UserOrder;
-        private readonly Ingredients Ingredients;
+        public bool IsCorrectUserInput { get; }
+        public List<string> UserOrder { get; }
+
+        private Ingredients Ingredients;
         //Always assigned before beign used? Er det i det heletatt vits å bruke før den blir assigna? 
-        public List<string> WrongInputs;
+        public List<string> WrongInputs { get; }
 
         public Order(params string[] order)
         {
